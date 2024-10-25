@@ -12,6 +12,7 @@ void nfc_rfid_detector_app_field_presence_start(NfcRfidDetectorApp* app) {
 
     // start the field presence nfc detection
     furi_hal_nfc_acquire();
+    furi_hal_nfc_low_power_mode_stop(); // FIXME: both rfid and nfc try to use TIM1
     furi_hal_nfc_field_detect_start();
 }
 
@@ -23,6 +24,7 @@ void nfc_rfid_detector_app_field_presence_stop(NfcRfidDetectorApp* app) {
 
     // stop the field presence nfc detection
     furi_hal_nfc_field_detect_stop();
+    furi_hal_nfc_low_power_mode_start();
     furi_hal_nfc_release();
 }
 
